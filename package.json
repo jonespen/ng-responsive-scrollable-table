@@ -1,0 +1,30 @@
+{
+  "name": "ng-responsive-scrollable-table",
+  "version": "0.0.0",
+  "description": "",
+  "main": "ng-responsive-scrollable-table.js",
+  "devDependencies": {
+    "gulp": "~3.8.8",
+    "karma": "~0.12.24",
+    "karma-chrome-launcher": "~0.1.5",
+    "karma-firefox-launcher": "~0.1.3",
+    "karma-jasmine": "~0.1.5",
+    "karma-junit-reporter": "~0.2.2"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonespen/ng-responsive-scrollable-table.git"
+  },
+  "keywords": [
+    "angularjs",
+    "responsive"
+  ],
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/jonespen/ng-responsive-scrollable-table/issues"
+  }
+}
