@@ -10,32 +10,27 @@ angular.module('ng-responsive-scrollable-table', [])
     return {
     	restrict: 'A',
     	controller: 'ScrollableTableController',
-      template: 'Name: {{customer.name}} Address: {{customer.address}}',
       link: function(scope, element, attrs, ctrl){
     		// scrollwrapper
-    		var scrollWrapper = angular.element('<div />', {
-            'class': 'ScrollableTable',
-            'html': '<div />' // The inner div is needed for styling
-        });
+    		var $scrollWrapper = angular.element('<div class="ScrollableTable"></div>');
+    		var parent;
 
-      	// wrap table in outer div
-      	element.wrap(scrollWrapper);
+      	// wrap table in scrollwrapper and a div
+      	element.wrap($scrollWrapper).wrap('<div></div>');
 
-        // Store a reference to the wrapper element
-        element.data('scrollWrapper', scrollWrapper);
-        // Move the scrollable element inside the wrapper element
-        //element.appendTo(scrollWrapper.find('div'));
+      	parent = element.parent()[0];
+
         // Check if the element is wider than its parent and thus needs to be scrollable
-        if (element[0].clientWidth > element.parent()[0].clientWidth) {
-          element.data('scrollWrapper').addClass('has-scroll');
+        if (element[0].clientWidth > parent.clientWidth) {
+        	$scrollWrapper.addClass('has-scroll');
         }
         // When the viewport size is changed, check again if the element needs to be scrollable
         angular.element(ctrl.$window).bind('resize orientationchange', function() {
-            if (element.outerWidth() > element.parent().outerWidth()) {
-                element.data('scrollWrapper').addClass('has-scroll');
-            } else {
-                element.data('scrollWrapper').removeClass('has-scroll');
-            }
+        	if (element[0].clientWidth > parent.clientWidth) {
+            $scrollWrapper.addClass('has-scroll');
+          } else {
+            $scrollWrapper.removeClass('has-scroll');
+          }
         });
       }
     };

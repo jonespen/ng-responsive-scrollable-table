@@ -1,0 +1,29 @@
+	body {
+		padding:0 20px;
+	}
+
+	/* Basic table styling */
+	table {
+		width:100%;
+		border-spacing:0;
+		border-collapse:collapse;
+	}
+	table,
+	th,
+	td {
+		border:1px solid #ccc;
+	}
+	th,
+	td {
+		padding:6px 8px;
+		vertical-align:top;
+	}
+	caption,
+	th {
+		font-weight:bold;
+		text-align:left;
+	}
+	thead th {
+		background:#f3f3f3;
+		white-space:nowrap;
+	}

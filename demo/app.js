@@ -1,0 +1,1 @@
+angular.module('ResponsiveScrollableTableExample', ['ng-responsive-scrollable-table']);

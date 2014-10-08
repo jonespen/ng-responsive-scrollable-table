@@ -1,10 +1,21 @@
 describe('ng responsive scrollable table', function() {
   
-  beforeEach(module('ng-responsive-scrollable-table'));
+  beforeEach(function () {
+  	module('ng-responsive-scrollable-table');
+
+    module(function($provide) {
+    	var myMock = {
+      	innerHeight: 400,
+        innerWidth: 500
+	    };
+	    //$provide.value('$window', myMock);
+    });
+	});
 
 	describe('directive', function() {
 	  var scope, 
 	  	$compile,
+	  	$window,
 	  	table,
 	  	markup = [
 			  '<table ng-responsive-scrollable-table>',
@@ -24,18 +35,39 @@ describe('ng responsive scrollable table', function() {
 			  ].join(' ');
 
 
-	  beforeEach(inject(function (_$rootScope_, _$compile_) {
+	  beforeEach(inject(function (_$rootScope_, _$compile_, _$window_) {
+	  	$window = _$window_;
 	    scope = _$rootScope_;
 	    $compile = _$compile_;
+
       table = $compile(markup)(scope);
       scope.$digest();
 	  }));
 
+	  var getScrollWrapper = function() {
+	  	return table.parent().parent();
+	  }
+
 		describe('should', function() {
+
 			it('wrap the table in two divs', function() {
-				console.log(table.parent());
 				expect(table.parent()[0].tagName).toBe('DIV');
-				expect(table.parent().parent()[0].tagName).toBe('DIV');
+				expect(getScrollWrapper()[0].tagName).toBe('DIV');
+			});
+
+			it('outer div should have class', function() {
+				expect(getScrollWrapper().hasClass('ScrollableTable')).toBe(true);
+			});
+
+			it('add has-scroll when parent size is smaller than table', function() {
+				var scrollWrapper = getScrollWrapper();
+				console.log(table[0].clientWidth);
+
+				var parent = angular.element('<div></div>')
+
+				scrollWrapper.wrap(parent);
+
+				expect(scrollWrapper.hasClass('has-scroll')).toBe(true);
 			});
 		});
 	});
